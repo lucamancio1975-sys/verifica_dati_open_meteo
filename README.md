@@ -1,0 +1,1 @@
+# verifica_dati_open_meteo
