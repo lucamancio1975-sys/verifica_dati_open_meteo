@@ -1,3 +1,5 @@
 stazione,id_stazione,data_run,data_previsione,anticipo_giorni,temp_media_24h,rh_media_24h,vpd_medio_24h
 San Donato (Orbetello),sandonato,2026-08-12,2026-08-13,1,30.76,45.54,2.6409
 San Donato (Orbetello),sandonato,2026-08-12,2026-08-14,2,30.81,36.83,3.0264
+San Donato (Orbetello),sandonato,2026-08-13,2026-08-14,1,30.44,41.69,2.7589
+San Donato (Orbetello),sandonato,2026-08-13,2026-08-15,2,29.24,43.94,2.4376
