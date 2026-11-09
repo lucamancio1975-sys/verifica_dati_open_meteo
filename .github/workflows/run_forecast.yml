@@ -1,18 +1,20 @@
-name: Run Giornaliera Previsioni Open-Meteo
+name: Run Giornaliera Previsioni Orarie Centraline Pomodoro
 
 on:
-  workflow_dispatch: # Attivato da cron-job.org via GitHub REST API o manualmente da interfaccia GitHub
+  workflow_dispatch: # Attivato alle 07:00 da cron-job.org via GitHub REST API o manualmente da interfaccia GitHub
+  schedule:
+    - cron: '0 6 * * *' # Backup automatico GitHub Actions ogni mattina alle 06:00 UTC (07:00 ora solare italiana)
 
 permissions:
   contents: write
 
 concurrency:
-  group: "open-meteo-forecast-run"
+  group: "open-meteo-pomodoro-forecast-run"
   cancel-in-progress: false
 
 jobs:
   run-forecast:
-    name: Download & Aggiornamento Database Previsioni
+    name: Download D+0, D+1, D+2 & Aggiornamento Archivio Orario in data/
     runs-on: ubuntu-latest
 
     steps:
@@ -32,19 +34,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Esecuzione scarico previsioni (3 stazioni)
+      - name: Esecuzione scarico previsioni orarie D+0, D+1, D+2 (6 centraline)
         run: |
           python run_forecast.py
 
-      - name: Commit e Push automatico del database CSV
+      - name: Commit e Push automatico dei file CSV in data/
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
-          git add database/*.csv
+          git add data/*.csv
           if git diff --staged --quiet; then
-            echo "Nessuna nuova previsione da salvare, nessun commit necessario."
+            echo "Nessuna nuova previsione o aggiornamento da salvare, nessun commit necessario."
           else
-            git commit -m "🤖 Auto-update database previsioni da GitHub Actions (Cron-Job Run)"
+            git commit -m "🤖 Auto-update archivio orario data/ (D+0, D+1, D+2) da GitHub Actions"
             git pull --rebase origin main || true
             git push origin main
           fi
