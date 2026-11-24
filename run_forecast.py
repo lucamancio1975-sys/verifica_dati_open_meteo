@@ -31,10 +31,10 @@ from app_scarico_previsioni import (
 )
 
 def run_forecast_headless():
-    print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Avvio run giornaliera (D+0, D+1, D+2) previsioni orarie Open-Meteo (6 centraline pomodoro)...")
+    total_stations = len(STAZIONI)
+    print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] Avvio run (D+0, D+1, D+2) previsioni orarie Open-Meteo ({total_stations} centraline)...")
 
     success_count = 0
-    total_stations = len(STAZIONI)
 
     for st_nome, cfg in STAZIONI.items():
         print(f"\n--- Elaborazione: {st_nome} (Codice: {cfg['codice']} | Coord: {cfg['lat']}, {cfg['lon']}) ---")

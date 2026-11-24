@@ -1,6 +1,6 @@
 # 🍅 AgroMeteo Centraline Pomodoro – Previsioni Orarie VPD (Open-Meteo)
 
-Applicazione **Streamlit** e script di automazione headless per lo scarico giornaliero (cron-job ore **07:00**) dei dati orari Open-Meteo e il calcolo del **VPD orario (Equazione di Tetens)** sulle **6 centraline di riferimento per il pomodoro**.
+Applicazione **Streamlit** e script di automazione headless per lo scarico automatico dei dati orari Open-Meteo e il calcolo del **VPD orario (Equazione di Tetens)** sulle **13 centraline agrometeorologiche di riferimento**.
 
 ---
 
@@ -14,6 +14,13 @@ Applicazione **Streamlit** e script di automazione headless per lo scarico giorn
 | **Casotto dei Pescatori** | `TOS11000013` | `42.769` | `11.016` | `data/TOS11000013_casotto_dei_pescatori.csv` |
 | **Rispescia** | `TOS11000005` | `42.706` | `11.145` | `data/TOS11000005_rispescia.csv` |
 | **San Donato** | `TOS03003099` | `42.554` | `11.237` | `data/TOS03003099_san_donato.csv` |
+| **Follonica** | `TOS03002459` | `42.933` | `10.765` | `data/TOS03002459_follonica.csv` |
+| **Manciano** | `TOS03003079` | `42.600` | `11.518` | `data/TOS03003079_manciano.csv` |
+| **Montenero** | `TOS11000051` | `42.951` | `11.439` | `data/TOS11000051_montenero.csv` |
+| **Pitigliano** | `TOS11000014` | `42.635` | `11.654` | `data/TOS11000014_pitigliano.csv` |
+| **Ottavo (Castiglion Fiorentino)** | `TOS11000038` | `43.373` | `11.890` | `data/TOS11000038_ottavo_castiglion_fiorentino.csv` |
+| **Stiacciole** | `TOS11000042` | `42.789` | `11.176` | `data/TOS11000042_stiacciole.csv` |
+| **Massa Marittima Valpiana** | `TOS11000041` | `43.021` | `10.865` | `data/TOS11000041_massa_marittima_valpiana.csv` |
 
 ---
 

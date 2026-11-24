@@ -126,6 +126,55 @@ STAZIONI = {
         "lat": 42.554,
         "lon": 11.237,
         "csv_filename": "TOS03003099_san_donato.csv"
+    },
+    "Follonica": {
+        "codice": "TOS03002459",
+        "nome_slug": "follonica",
+        "lat": 42.933,
+        "lon": 10.765,
+        "csv_filename": "TOS03002459_follonica.csv"
+    },
+    "Manciano": {
+        "codice": "TOS03003079",
+        "nome_slug": "manciano",
+        "lat": 42.600,
+        "lon": 11.518,
+        "csv_filename": "TOS03003079_manciano.csv"
+    },
+    "Montenero": {
+        "codice": "TOS11000051",
+        "nome_slug": "montenero",
+        "lat": 42.951,
+        "lon": 11.439,
+        "csv_filename": "TOS11000051_montenero.csv"
+    },
+    "Pitigliano": {
+        "codice": "TOS11000014",
+        "nome_slug": "pitigliano",
+        "lat": 42.635,
+        "lon": 11.654,
+        "csv_filename": "TOS11000014_pitigliano.csv"
+    },
+    "Ottavo (Castiglion Fiorentino)": {
+        "codice": "TOS11000038",
+        "nome_slug": "ottavo_castiglion_fiorentino",
+        "lat": 43.373,
+        "lon": 11.890,
+        "csv_filename": "TOS11000038_ottavo_castiglion_fiorentino.csv"
+    },
+    "Stiacciole": {
+        "codice": "TOS11000042",
+        "nome_slug": "stiacciole",
+        "lat": 42.789,
+        "lon": 11.176,
+        "csv_filename": "TOS11000042_stiacciole.csv"
+    },
+    "Massa Marittima Valpiana": {
+        "codice": "TOS11000041",
+        "nome_slug": "massa_marittima_valpiana",
+        "lat": 43.021,
+        "lon": 10.865,
+        "csv_filename": "TOS11000041_massa_marittima_valpiana.csv"
     }
 }
 
@@ -407,7 +456,7 @@ def main():
         [f"• **{nome}** (`{cfg['codice']}`): {cfg['lat']}°N, {cfg['lon']}°E" for nome, cfg in STAZIONI.items()]
     )
     st.sidebar.info(
-        f"**6 Centraline Monitorate**:\n{stazioni_list_md}\n\n"
+        f"**{len(STAZIONI)} Centraline Monitorate**:\n{stazioni_list_md}\n\n"
         f"**Modelli**: ICON-EU + ECMWF IFS025 (Media)\n"
         f"**Finestra Scarico**: D+0 (00-23), D+1, D+2 (72 ore/run)\n"
         f"**Aggiornamento**: Sovrascrittura ore esistenti con dati più freschi\n"
@@ -415,9 +464,9 @@ def main():
         f"**GitHub Sync**: {'✅ Attiva (' + str(gh_repo) + ')' if gh_configured else '⚠️ Solo Locale'}"
     )
 
-    st.markdown("""
+    st.markdown(f"""
     <div class="info-card">
-        📲 <strong>Workflow Run Mattutina (Ore 07:00):</strong> Scarica per le 6 centraline i dati orari del giorno corrente <strong>D+0</strong> (dalle <code>00:00</code> alle <code>06:00</code> già trascorse + previsione fino alle <code>23:00</code>), di domani (<strong>D+1</strong>) e dopodomani (<strong>D+2</strong>).<br>
+        📲 <strong>Workflow Run Previsionale:</strong> Scarica per le {len(STAZIONI)} centraline i dati orari del giorno corrente <strong>D+0</strong> (dalle <code>00:00</code> alle <code>23:00</code>), di domani (<strong>D+1</strong>) e dopodomani (<strong>D+2</strong>).<br>
         🔄 <strong>Sostituzione Intelligente:</strong> Le ore già presenti in archivio da run precedenti (es. vecchi D+2 e D+1) vengono automaticamente <strong>sovrascritte con i dati più freschi e precisi</strong> dell'ultima run.
     </div>
     """, unsafe_allow_html=True)
@@ -431,7 +480,7 @@ def main():
             help="Se attivo e i Secrets sono configurati, invia i CSV aggiornati nella cartella data/ del repository GitHub."
         )
     with col_btn:
-        btn_run = st.button("🚀 ESEGUI RUN GIORNALIERA (D+0, D+1, D+2 - 6 CENTRALINE)", use_container_width=True)
+        btn_run = st.button(f"🚀 ESEGUI RUN GIORNALIERA (D+0, D+1, D+2 - {len(STAZIONI)} CENTRALINE)", use_container_width=True)
 
     if btn_run:
         with st.spinner("⏳ Scarico 72 ore (D+0, D+1, D+2), calcolo VPD Tetens e sostituzione ore con dati più freschi..."):
